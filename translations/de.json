@@ -1,0 +1,13 @@
+{
+    "Confirmed": "Bestätigt",
+    "New Cases": "Neue Fälle",
+    "Deaths": "Todesfälle",
+    "New Deaths": "Neue Todesf.",
+    "Recovered": "Genesen",
+    "Active": "Aktiv",
+    "Worldwide" : "Weltweit",
+    "statistic taken at ": "Letzte Statistik: ",
+    "Serious" : "Schwere Fälle",
+    "Cases Per M" : "Fälle Pro M",
+    "N/A" : "N/A"
+}

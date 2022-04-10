@@ -1,0 +1,25 @@
+{
+  "name": "mmm-covidstats",
+  "version": "1.0.0",
+  "description": "MagicMirror Module to get COVID19 Stats",
+  "main": "MMM-CovidStats.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mumblebaj/MMM-CovidStats.git"
+  },
+  "keywords": [
+    "MagicMirror²"
+  ],
+  "author": "mumblebaj",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mumblebaj/MMM-CovidStats/issues"
+  },
+  "homepage": "https://github.com/mumblebaj/MMM-CovidStats#readme",
+  "dependencies": {
+    "node-fetch": "^2.6.1"
+  }
+}
