@@ -1,7 +1,5 @@
 var NodeHelper = require('node_helper')
 var fetch = require('node_fetch')
-var luxon = require('luxon')
-const DateTime = luxon.DateTime
 
 var getCountryStatsURL = 'https://corona.lmao.ninja/v2/countries/:query?yesterday='
 var globalStatsURL = 'https://corona.lmao.ninja/v2/all?yesterday='
