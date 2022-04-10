@@ -4,7 +4,7 @@ Module.register("MMM-CovidStats", {
         header: "MMM-CovidStats",
         countries: ["USA", "ZAF", "ESP", "GBR"],
         globlStats: true,
-        sortBy: cases, // cases, todayCases, deaths, todayDeaths, recovered, active, critical, casesPerOneMillion, deathsPerOneMillion
+        sortBy: "cases", // cases, todayCases, deaths, todayDeaths, recovered, active, critical, casesPerOneMillion, deathsPerOneMillion
         highlightCountry: "",
         updateInterval: 1000,
         fadeSpeed: 1000
@@ -23,16 +23,22 @@ Module.register("MMM-CovidStats", {
         }
     },
 
+    getTemplate() {
+        return `templates/${this.name}.njk`;
+    },
+
     start: function() {
+        Log.info(`Starting module: ${this.name}`);
+
         this.getCovidStats()
         this.scheduleUpdate()
     },
 
     getCovidStats: function() {
-        this.sendSocketNotification("GET_COVIDSTATS_COUNTRY")
+        this.sendSocketNotification("GET_COVIDSTATS_COUNTRY", this.config)
 
         if (this.config.globlStats) {
-            this.sendSocketNotification("GET_COVIDSTATS_GLOBAL")
+            this.sendSocketNotification("GET_COVIDSTATS_GLOBAL", this.config)
         }
     },
     
@@ -48,7 +54,7 @@ Module.register("MMM-CovidStats", {
         }, nextUpdate)
     }, 
 
-    socketNotificationReceived: function(notification, [payload]) {
+    socketNotificationReceived: function(notification, payload) {
         var self = this
         if (notification === "COVIDSTATS_COUNTRY_RESULTS") {
             this.countryStats = payload
@@ -59,15 +65,5 @@ Module.register("MMM-CovidStats", {
             this.globalStats = payload
             this.updateDom(self.config.fadeSpeed)
         }
-    },
-
-    getHeader: function() {
-        return this.config.header
-    },
-
-    getDom: function() {
-        var wrapper = document.createElement("table")
-        if (Object.entries(this.countryStats).length === 0) return wrapper
-        if (Object.entries(this.globalStats).length === 0) return wrapper
     }
 })

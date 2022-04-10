@@ -1,0 +1,33 @@
+<header>{{ config.title }}</header>
+{% if not globalStats %}
+    <div class="dimmed light">{{ "LOADING" | translate }}</div>
+{% else %}
+    <table class="small table">
+        <thead>
+            <tr>
+                <th>{{ }}</th>
+                <th>{{ }}</th>
+                <th>{{ "Confirmed" | translate }}</th>
+                <th>{{ "New Cases" | translate }}</th>
+                <th>{{ "Deaths" | translate }}</th>
+                <th>{{ "New Deaths" | translate }}</th>
+                <th>{{ "Recovered" | translate }}</th>
+                <th>{{ "Active" | translate }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for stats in globalStats %}
+            <tr class="{{ "bright" if config.highlight === country.code }}">
+                <td aling="left"><img src=`${stats.countryInfo.flag}` width=30px height=30px /></td>
+                <td align="center">{{ stats.country }}</td>
+                <td align="right">{{ stats.cases }}</td>
+                <td align="right">{{ stats.todayCases }}</td>
+                <td align="right">{{ stats.deaths }}</td>
+                <td align="right">{{ stats.todayDeaths }}</td>
+                <td align="right">{{ stats.recovered }}</td>
+                <td align="right">{{ stats.active }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
