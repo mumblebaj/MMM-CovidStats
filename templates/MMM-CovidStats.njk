@@ -31,14 +31,14 @@
         {% endif %}
             {% for stats in countries %}
             <tr class="{{ "bright" if config.highlightCountry === stats.countryInfo.iso3 }}">
-                <td aling="left"><img src="{{ stats.countryInfo.flag }}" width=30px height=30px /></td>
+                <td align="center"><img src="{{ stats.countryInfo.flag }}" width=30px height=30px /></td>
                 <td align="center">{{ stats.country }}</td>
-                <td align="right">{{ stats.cases }}</td>
-                <td align="right">{{ stats.todayCases }}</td>
-                <td align="right">{{ stats.deaths }}</td>
-                <td align="right">{{ stats.todayDeaths }}</td>
-                <td align="right">{{ stats.recovered }}</td>
-                <td align="right">{{ stats.active }}</td>
+                <td align="center">{{ stats.cases }}</td>
+                <td align="center">{{ stats.todayCases }}</td>
+                <td align="center">{{ stats.deaths }}</td>
+                <td align="center">{{ stats.todayDeaths }}</td>
+                <td align="center">{{ stats.recovered }}</td>
+                <td align="center">{{ stats.active }}</td>
             </tr>
             {% endfor %}
         </tbody>
