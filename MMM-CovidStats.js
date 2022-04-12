@@ -1,12 +1,13 @@
 Module.register("MMM-CovidStats", {
     // Declare default inputs
     defaults: {
-        header: "MMM-CovidStats",
+        title: "MMM-CovidStats",
         countries: ["USA", "ZAF", "ESP", "GBR"],
-        globlStats: true,
+        globlStats: false,
+        period: current, // options current or yesterday
         sortBy: "cases", // cases, todayCases, deaths, todayDeaths, recovered, active, critical, casesPerOneMillion, deathsPerOneMillion
-        highlightCountry: "",
-        updateInterval: 1000,
+        highlightCountry: "USA",
+        updateInterval: 86400000, // Update once every 24 hours
         fadeSpeed: 1000
     },
 
@@ -18,13 +19,29 @@ Module.register("MMM-CovidStats", {
         return {
             en: "translations/en.json",
             de: "translations/de.json",
-            es: "translations/es.json",
             fr: "translations/fr.json"
         }
     },
 
     getTemplate() {
         return `templates/${this.name}.njk`;
+    },
+
+    getCountryStats() {
+        const countries = this.countryStats
+        return countries;
+    },
+
+    getGlobalStats() {
+        const globalstats = this.globalStats
+        return globalstats;
+    },
+
+    getTemplateData() {
+        return {
+            countries: this.getCountryStats(),
+            globalstats: this.getGlobalStats()
+        }
     },
 
     start: function() {
@@ -37,7 +54,7 @@ Module.register("MMM-CovidStats", {
     getCovidStats: function() {
         this.sendSocketNotification("GET_COVIDSTATS_COUNTRY", this.config)
 
-        if (this.config.globlStats) {
+        if (this.config.globalStats === true) {
             this.sendSocketNotification("GET_COVIDSTATS_GLOBAL", this.config)
         }
     },

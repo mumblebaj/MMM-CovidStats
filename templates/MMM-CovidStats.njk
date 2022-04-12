@@ -1,12 +1,12 @@
-<header>{{ config.title }}</header>
-{% if not globalStats %}
+<header class="covhead">{{ config.title }}</header>
+{% if not countries %}
     <div class="dimmed light">{{ "LOADING" | translate }}</div>
 {% else %}
     <table class="small table">
         <thead>
             <tr>
-                <th>{{ }}</th>
-                <th>{{ }}</th>
+                <th>{{ " " }}</th>
+                <th>{{ " " }}</th>
                 <th>{{ "Confirmed" | translate }}</th>
                 <th>{{ "New Cases" | translate }}</th>
                 <th>{{ "Deaths" | translate }}</th>
@@ -16,9 +16,22 @@
             </tr>
         </thead>
         <tbody>
-            {% for stats in globalStats %}
-            <tr class="{{ "bright" if config.highlight === country.code }}">
-                <td aling="left"><img src=`${stats.countryInfo.flag}` width=30px height=30px /></td>
+        {% if globalstats %}
+        {# Add Global stats here #}
+          <tr class="globalsts">
+                <td>{{" " }}</td>
+                <td align="center"> {{ "Global Stats" }}</td>
+                <td align="center">{{ globalstats.cases }}</td>
+                <td align="center">{{ globalstats.todayCases }}</td>
+                <td align="center">{{ globalstats.deaths }}</td>
+                <td align="center">{{ globalstats.todayDeaths }}</td>
+                <td align="center">{{ globalstats.recovered }}</td>
+                <td align="center">{{ globalstats.active }}</td>
+           </tr>
+        {% endif %}
+            {% for stats in countries %}
+            <tr class="{{ "bright" if config.highlightCountry === stats.countryInfo.iso3 }}">
+                <td aling="left"><img src="{{ {stats.countryInfo.flag }}" width=30px height=30px /></td>
                 <td align="center">{{ stats.country }}</td>
                 <td align="right">{{ stats.cases }}</td>
                 <td align="right">{{ stats.todayCases }}</td>

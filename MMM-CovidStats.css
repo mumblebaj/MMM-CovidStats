@@ -3,3 +3,12 @@
     border-collapse: separate;
     text-align: center;
 }
+
+.MMM-CovidStats .covhead {
+    font-size: 1.5rem;
+    padding-bottom: 20px;
+}
+
+.MMM-CovidStats .globalsts {
+    padding-bottom: 15px;
+}

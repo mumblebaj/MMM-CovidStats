@@ -14,8 +14,17 @@ module.exports = NodeHelper.create({
     async getCovidStatsByCountry(payload) {
         var countryList = payload.countries
         var sortby = payload.sortBy
+        var period = ""
+
+        if (payload.period === "current" ) {
+            period = "false"
+        } else { 
+                if(payload.period === "yesterday") { 
+                    period = "true" 
+                } else { period = "false"}
+            }
         
-        const getCountryStatsURL = `https://corona.lmao.ninja/v2/countries/${countryList}?yesterday&sort=${sortby}`
+        const getCountryStatsURL = `https://corona.lmao.ninja/v2/countries/${countryList}?yesterday=${period}&sort=${sortby}`
 
         var response = await fetch(getCountryStatsURL)
 
@@ -30,7 +39,20 @@ module.exports = NodeHelper.create({
     },
 
     async getCovidStatsByGlobal(payload) {
-        console.log("I have nothing to do yet!")
+        
+        var sortby = payload.sortBy
+        
+        const getGlobalStatsURL = `https://corona.lmao.ninja/v2/all?yesterday=true&sort=${sortby}`
+
+        var response = await fetch(getGlobalStatsURL)
+
+        if (!response.status == 200) {
+            console.log(`Error fetching global stats: ${response.statusCode} ${response.statusText}`)
+            return;
+        }
+        var parsedResponse = await response.json()
+        
+        this.sendSocketNotification('COVIDSTATS_GLOBAL_RESULTS', parsedResponse)
     },
 
     socketNotificationReceived: function (notification, payload) {
