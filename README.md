@@ -55,8 +55,8 @@ The following properties can be configured:
 | `title`                      | The Title text <br>Must be added to the config section
 | `countries`                  | An array of iso3 country codes which can be found [here](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3)
 | `globalStats`                | Include Global Stats <br><br> **Possible values:** `true` or `false`
-| `highlighCountry`             } The iso3 code of the country to highlight
-| `updateInterval`               | The time interval to between fetching new stats <br> **Default value:** `24 hours`
+| `highlighCountry`            | The iso3 code of the country to highlight
+| `updateInterval`             | The time interval to between fetching new stats <br> **Default value:** `24 hours`
 | `fadeInterval`               | The fade interval
 
 ## Updating
