@@ -39,6 +39,7 @@ Module.register("MMM-CovidStats", {
 
     getTemplateData() {
         return {
+            config: this.config,
             countries: this.getCountryStats(),
             globalstats: this.getGlobalStats()
         }
