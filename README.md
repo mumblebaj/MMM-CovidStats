@@ -55,7 +55,6 @@ The following properties can be configured:
 | `title`                      | The Title text <br>Must be added to the config section
 | `countries`                  | An array of iso3 country codes which can be found [here](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3)
 | `globalStats`                | Include Global Stats <br><br> **Possible values:** `true` or `false`
-| `sortBy`                     | The value to sort the results by <br> **Possible value:** `cases`, `todayCases`, `deaths`, `todayDeaths`, `recovered`, `active`, `critical`, `casesPerOneMillion`, `deathsPerOneMillion`
 | `highlighCountry`             } The iso3 code of the country to highlight
 | `updateInterval`               | The time interval to between fetching new stats <br> **Default value:** `24 hours`
 | `fadeInterval`               | The fade interval
