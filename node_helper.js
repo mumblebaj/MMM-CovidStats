@@ -13,7 +13,7 @@ module.exports = NodeHelper.create({
 
     async getCovidStatsByCountry(payload) {
         var countryList = payload.countries
-        var sortby = payload.sortBy
+        
         var period = ""
 
         if (payload.period === "current" ) {
@@ -24,7 +24,7 @@ module.exports = NodeHelper.create({
                 } else { period = "false"}
             }
         
-        const getCountryStatsURL = `https://corona.lmao.ninja/v2/countries/${countryList}?yesterday=${period}&sort=${sortby}`
+        const getCountryStatsURL = `https://corona.lmao.ninja/v2/countries/${countryList}?yesterday=${period}`
 
         var response = await fetch(getCountryStatsURL)
 
@@ -39,10 +39,18 @@ module.exports = NodeHelper.create({
     },
 
     async getCovidStatsByGlobal(payload) {
-        
-        var sortby = payload.sortBy
-        
-        const getGlobalStatsURL = `https://corona.lmao.ninja/v2/all?yesterday=true&sort=${sortby}`
+
+        var period = ""
+
+        if (payload.period === "current" ) {
+            period = "false"
+        } else { 
+                if(payload.period === "yesterday") { 
+                    period = "true" 
+                } else { period = "false"}
+            }
+                
+        const getGlobalStatsURL = `https://corona.lmao.ninja/v2/all?yesterday=${period}`
 
         var response = await fetch(getGlobalStatsURL)
 

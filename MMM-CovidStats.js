@@ -5,7 +5,6 @@ Module.register("MMM-CovidStats", {
         countries: ["USA", "ZAF", "ESP", "GBR"],
         globlStats: false,
         period: "current", // options current or yesterday
-        sortBy: "cases", // cases, todayCases, deaths, todayDeaths, recovered, active, critical, casesPerOneMillion, deathsPerOneMillion
         highlightCountry: "USA",
         updateInterval: 86400000, // Update once every 24 hours
         fadeSpeed: 1000
