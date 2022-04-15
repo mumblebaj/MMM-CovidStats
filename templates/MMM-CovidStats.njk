@@ -2,45 +2,163 @@
 {% if not countries %}
     <div class="dimmed light">{{ "LOADING" | translate }}</div>
 {% else %}
-    <table class="small table">
-        <thead>
-            <tr>
-                <th>{{ " " }}</th>
-                <th>{{ " " }}</th>
-                <th>{{ "Confirmed" | translate }}</th>
-                <th>{{ "New Cases" | translate }}</th>
-                <th>{{ "Deaths" | translate }}</th>
-                <th>{{ "New Deaths" | translate }}</th>
-                <th>{{ "Recovered" | translate }}</th>
-                <th>{{ "Active" | translate }}</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% if globalstats %}
-        {# Add Global stats here #}
-          <tr class="globalsts">
-                <td>{{" " }}</td>
-                <td align="center"> {{ "Global Stats" }}</td>
-                <td align="center">{{ globalstats.cases }}</td>
-                <td align="center">{{ globalstats.todayCases }}</td>
-                <td align="center">{{ globalstats.deaths }}</td>
-                <td align="center">{{ globalstats.todayDeaths }}</td>
-                <td align="center">{{ globalstats.recovered }}</td>
-                <td align="center">{{ globalstats.active }}</td>
-           </tr>
-        {% endif %}
-            {% for stats in countries %}
-            <tr class="{{ "bright" if config.highlightCountry === stats.countryInfo.iso3 }}">
-                <td align="center"><img src="{{ stats.countryInfo.flag }}" width=30px height=30px /></td>
-                <td align="center">{{ stats.country }}</td>
-                <td align="center">{{ stats.cases }}</td>
-                <td align="center">{{ stats.todayCases }}</td>
-                <td align="center">{{ stats.deaths }}</td>
-                <td align="center">{{ stats.todayDeaths }}</td>
-                <td align="center">{{ stats.recovered }}</td>
-                <td align="center">{{ stats.active }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    {% if config.datatoDisplay %}
+        <table class="small table">
+            <thead>
+                <tr>
+                    <th>{{ " " }}</th>
+                    <th>{{ " " }}</th>
+                    <th>
+                        {{ config.datatoDisplay[0] | replace(config.datatoDisplay[0], "Confirmed") | translate }}</th>
+                    <th>
+                        {{ config.datatoDisplay[1] | replace(config.datatoDisplay[1], "New Cases") | translate }}</th>
+                    <th>
+                        {{ config.datatoDisplay[2] | replace(config.datatoDisplay[2], "Deaths") | translate }}</th>
+                    <th>
+                        {{ config.datatoDisplay[3] | replace(config.datatoDisplay[3], "New Deaths") | translate }}</th>
+                    <th>
+                        {{ config.datatoDisplay[4] | replace(config.datatoDisplay[4], "Recovered") | translate }}</th>
+                    <th>
+                        {{ config.datatoDisplay[5] | replace(config.datatoDisplay[5], "Active") | translate }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if globalstats %}
+                    {# Add Global stats here #}
+                    <tr class="globalsts">
+                        <td>{{ " " }}</td>
+                        <td align="center">
+                            {{ "Global Stats" }}</td>
+                        <td align="center">
+                            {% if config.datatoDisplay[0] %}{{ globalstats.cases }}
+                            {% endif %}
+                        </td>
+                        <td align="center">
+                            {% if config.datatoDisplay[1] %}{{ globalstats.todayCases }}
+                            {% endif %}
+                        </td>
+                        <td align="center">
+                            {% if config.datatoDisplay[2] %}{{ globalstats.deaths }}
+                            {% endif %}
+                        </td>
+                        <td align="center">
+                            {% if config.datatoDisplay[3] %}{{ globalstats.todayDeaths }}
+                            {% endif %}
+                        </td>
+                        <td align="center">
+                            {% if config.datatoDisplay[4] %}{{ globalstats.recovered }}
+                            {% endif %}
+                        </td>
+                        <td align="center">
+                            {% if config.datatoDisplay[5] %}{{ globalstats.active }}
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% for stats in countries %}
+                        <tr class="{{ "bright" if config.highlightCountry === stats.countryInfo.iso3 }}">
+                            <td align="left"><img src="{{ stats.countryInfo.flag }}"  width=30px height=30px/></td>
+                            <td align="center">{{ stats.country }}</td>
+                            <td align="center">
+                                {% if config.datatoDisplay[0] %}{{ stats.cases }}
+                                {% endif %}
+                            </td>
+                            <td align="center">
+                                {% if config.datatoDisplay[1] %}{{ stats.todayCases }}
+                                {% endif %}
+                            </td>
+                            <td align="center">
+                                {% if config.datatoDisplay[2] %}{{ stats.deaths }}
+                                {% endif %}
+                            </td>
+                            <td align="center">
+                                {% if config.datatoDisplay[3] %}{{ stats.todayDeaths }}
+                                {% endif %}
+                            </td>
+                            <td align="center">
+                                {% if config.datatoDisplay[4] %}{{ stats.recovered }}
+                                {% endif %}
+                            </td>
+                            <td align="center">
+                                {% if config.datatoDisplay[5] %}{{ stats.active }}
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
+    {% else %}
+        <table class="small table">
+            <thead>
+                <tr>
+                    <th>{{ " " }}</th>
+                    <th>{{ " " }}</th>
+                    <th>{{ "Confirmed" | translate }}</th>
+                    <th>{{ "New Cases" | translate }}</th>
+                    <th>{{ "Deaths" | translate }}</th>
+                    <th>{{ "New Deaths" | translate }}</th>
+                    <th>{{ "Recovered" | translate }}</th>
+                    <th>{{ "Active" | translate }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if globalstats %}
+                    {# Add Global stats here #}
+                    <tr class="globalsts">
+                        <td>{{ " " }}</td>
+                        <td align="center">
+                            {{ "Global Stats" }}</td>
+                        <td align="center">
+                            {% if config.datatoDisplay[0] %}{{ globalstats.cases }}
+                            {% endif %}
+                        </td>
+                        <td align="center">
+                            {% if config.datatoDisplay[1] %}{{ globalstats.todayCases }}
+                            {% endif %}
+                        </td>
+                        <td align="center">
+                            {% if config.datatoDisplay[2] %}{{ globalstats.deaths }}
+                            {% endif %}
+                        </td>
+                        <td align="center">
+                            {% if config.datatoDisplay[3] %}{{ globalstats.todayDeaths }}
+                            {% endif %}
+                        </td>
+                        <td align="center">
+                            {% if config.datatoDisplay[4] %}{{ globalstats.recovered }}
+                            {% endif %}
+                        </td>
+                        <td align="center">
+                            {% if config.datatoDisplay[5] %}{{ globalstats.active }}
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% else %}
+                <tr class="globalsts">
+                    <td>{{ " " }}</td>
+                    <td align="center">
+                        {{ "Global Stats" }}</td>
+                    <td align="center">{{ globalstats.cases }}</td>
+                    <td align="center">{{ globalstats.todayCases }}</td>
+                    <td align="center">{{ globalstats.deaths}}</td>
+                    <td align="center">{{ globalstats.todayDeaths }}</td>
+                    <td align="center">{{ globalstats.recovered }}</td>
+                    <td align="center">{{ globalstats.active }}</td>
+                </tr>
+                {% endif %}
+                {% for stats in countries %}
+                    <tr class="{{ "bright" if config.highlightCountry === stats.countryInfo.iso3 }}">
+                        <td align="left"><img src="{{ stats.countryInfo.flag }}"  width=30px height=30px/></td>
+                        <td align="center">{{ stats.country }}</td>
+                        <td align="center">{{ stats.cases }}</td>
+                        <td align="center">{{ stats.todayCases }}</td>
+                        <td align="center">{{ stats.deaths }}</td>
+                        <td align="center">{{ stats.todayDeaths }}</td>
+                        <td align="center">{{ stats.recovered }}</td>
+                        <td align="center">{{ stats.active }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
 {% endif %}
