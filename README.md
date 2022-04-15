@@ -17,7 +17,7 @@ All possibnle values:
 ````
 ["country", "cases", "todayCases", "deaths", "todayDeaths", "recovered", "active",]
 ````
-In order to display all data by defaults just omit the *datatoDisplay8 tag.
+In order to display all data by default just omit the ````datatoDisplay```` tag.
 
 ## Dependencies
 - node-fetch 2.6.1
@@ -46,7 +46,7 @@ Add the module to the modules array in the `config/config.js` file:
                 config: {
                                 countries: ["USA","ZAF","ESP"],
                                 globalStats: true,
-                                datatoDisplay: ["country", "cases", "todayCases", "deaths", "todayDeaths"]
+                                datatoDisplay: ["country", "cases", "todayCases", "deaths", "todayDeaths"],
                                 period: "yesterday",
                                 title: "COVID STATS",
                                 sortBy: "cases",
