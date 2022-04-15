@@ -8,6 +8,17 @@ A [MagicMirror²](https://magicmirror.builders) module to display Covid Stats fr
 ![Example](image-1.png) 
 ![Example](image-2.png) 
 
+## Changes
+- You can now select to display only specific data. You have to add the following to the config
+````
+datatoDisplay: ["country", "cases", "todayCases", "deaths", "todayDeaths"]
+````
+All possibnle values:
+````
+["country", "cases", "todayCases", "deaths", "todayDeaths", "recovered", "active",]
+````
+In order to display all data by defaults just omit the *datatoDisplay8 tag.
+
 ## Dependencies
 - node-fetch 2.6.1
 
@@ -35,6 +46,7 @@ Add the module to the modules array in the `config/config.js` file:
                 config: {
                                 countries: ["USA","ZAF","ESP"],
                                 globalStats: true,
+                                datatoDisplay: ["country", "cases", "todayCases", "deaths", "todayDeaths"]
                                 period: "yesterday",
                                 title: "COVID STATS",
                                 sortBy: "cases",
