@@ -4,7 +4,7 @@
 {% else %}
         <table class="small table">
             <thead>
-                <tr>
+                <tr class="covheaders">
                     <th>{{ " " }}</th>
                     <th>{{ " " }}</th>
                     <th>{{ "Confirmed" | translate }}</th>
@@ -15,7 +15,7 @@
                     <th>{{ "Active" | translate }}</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="covbody">
                 {% if globalstats %}
                     {# Add Global stats here #}
                     <tr class="globalsts">
