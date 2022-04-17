@@ -4,6 +4,7 @@ Module.register("MMM-CovidStats", {
         title: "MMM-CovidStats",
         countries: ["USA", "ZAF", "ESP", "GBR"],
         globlStats: false,
+        sortBy: "cases", // Sort the list of country stats by this value
         period: "current", // options current or yesterday
         highlightCountry: "USA",
         updateInterval: 86400000, // Update once every 24 hours

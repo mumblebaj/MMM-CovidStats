@@ -54,7 +54,7 @@
                         <td align="center">{{ globalstats.active }}</td>
                     </tr>
                 {% endif %}
-                {% for stats in countries %}
+                {% for stats in countries | sort(true, false, config.sortBy) %}
                     <tr class="{{ "bright" if config.highlightCountry === stats.countryInfo.iso3 }}">
                         <td align="left"><img src="{{ stats.countryInfo.flag }}"  width=30px height=30px/></td>
                         <td align="center">{{ stats.country }}</td>
