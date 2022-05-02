@@ -26,7 +26,7 @@ module.exports = NodeHelper.create({
                     "flag": e.countryInfo.flag
                 },
                 "cases": e.cases,
-                "todatyCases": e.todayCases,
+                "todayCases": e.todayCases,
                 "deaths": e.deaths,
                 "todayDeaths": e.todayDeaths,
                 "recovered": e.recovered,
