@@ -44,14 +44,13 @@ module.exports = NodeHelper.create({
         let formatedDate = DateTime.fromISO(updateDate).toLocaleString(DateTime.DATETIME_MED);
         worldData.push({
             "updated": formatedDate,
-            "cases": e.cases,
-            "todatyCases": e.todayCases,
-            "deaths": e.deaths,
-            "todayDeaths": e.todayDeaths,
-            "recovered": e.recovered,
-            "todayRecovered": e.todayRecovered,
-            "active": e.active,
-            "critical": e.critical
+            "cases": cases,
+            "todatyCases": todayCases,
+            "deaths": deaths,
+            "todayDeaths": todayDeaths,
+            "recovered": recovered,
+            "todayRecovered": todayRecovered,
+            "active": active,
         })
 
         return worldData;
