@@ -2,6 +2,7 @@
     border-spacing: 10px 0;
     border-collapse: separate;
     text-align: center;
+    border-bottom: 1px solid white;
 }
 
 .MMM-CovidStats .covhead {
