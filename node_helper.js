@@ -13,32 +13,32 @@ module.exports = NodeHelper.create({
         console.log('Starting node helper for: ' + this.name)
     },
 
-    deconstructCountryData: function(payload) {
+    deconstructCountryData: function (payload) {
         covidData = [];
-        payload.forEach(function(e) {
+        payload.forEach(function (e) {
             let updateDate = DateTime.fromMillis(e.updated).toISO();
             let formatedDate = DateTime.fromISO(updateDate).toLocaleString(DateTime.DATETIME_MED);
             covidData.push({
                 "updated": formatedDate,
                 "country": e.country,
-                "iso3": e.countryInfo.iso3,
-                "flag": e.countryInfo.flag,
-                "casesInfo": {
-                    "cases": e.cases,
-                    "todatyCases": e.todayCases,
-                    "deaths": e.deaths,
-                    "todayDeaths": e.todayDeaths,
-                    "recovered": e.recovered,
-                    "todayRecovered": e.todayRecovered,
-                    "active": e.active,
-                    "critical": e.critical
-                }
+                "countryInfo": {
+                    "iso3": e.countryInfo.iso3,
+                    "flag": e.countryInfo.flag
+                },
+                "cases": e.cases,
+                "todatyCases": e.todayCases,
+                "deaths": e.deaths,
+                "todayDeaths": e.todayDeaths,
+                "recovered": e.recovered,
+                "todayRecovered": e.todayRecovered,
+                "active": e.active,
+                "critical": e.critical
             })
         })
         return covidData;
     },
 
-    deconstructWorldData: function(woldpayload) {
+    deconstructWorldData: function (woldpayload) {
         worldData = [];
         let updateDate = DateTime.fromMillis(e.updated).toISO();
         let formatedDate = DateTime.fromISO(updateDate).toLocaleString(DateTime.DATETIME_MED);
@@ -59,17 +59,17 @@ module.exports = NodeHelper.create({
 
     async getCovidStatsByCountry(payload) {
         var countryList = payload.countries
-        
+
         var period = ""
 
-        if (payload.period === "current" ) {
+        if (payload.period === "current") {
             period = "false"
-        } else { 
-                if(payload.period === "yesterday") { 
-                    period = "true" 
-                } else { period = "false"}
-            }
-        
+        } else {
+            if (payload.period === "yesterday") {
+                period = "true"
+            } else { period = "false" }
+        }
+
         const getCountryStatsURL = `https://corona.lmao.ninja/v2/countries/${countryList}?yesterday=${period}`
 
         var response = await fetch(getCountryStatsURL)
@@ -78,8 +78,9 @@ module.exports = NodeHelper.create({
             console.log(`Error fetching country stats: ${response.statusCode} ${response.statusText}`)
             return;
         }
-        var parsedResponse = await response.json()
-        
+        var countryData = await response.json();
+        var parsedResponse = deconstructCountryData(countryData);
+
         this.sendSocketNotification('COVIDSTATS_COUNTRY_RESULTS', parsedResponse)
 
     },
@@ -88,14 +89,14 @@ module.exports = NodeHelper.create({
 
         var period = ""
 
-        if (payload.period === "current" ) {
+        if (payload.period === "current") {
             period = "false"
-        } else { 
-                if(payload.period === "yesterday") { 
-                    period = "true" 
-                } else { period = "false"}
-            }
-                
+        } else {
+            if (payload.period === "yesterday") {
+                period = "true"
+            } else { period = "false" }
+        }
+
         const getGlobalStatsURL = `https://corona.lmao.ninja/v2/all?yesterday=${period}`
 
         var response = await fetch(getGlobalStatsURL)
@@ -105,7 +106,7 @@ module.exports = NodeHelper.create({
             return;
         }
         var parsedResponse = await response.json()
-        
+
         this.sendSocketNotification('COVIDSTATS_GLOBAL_RESULTS', parsedResponse)
     },
 
@@ -116,7 +117,7 @@ module.exports = NodeHelper.create({
 
         if (notification === 'GET_COVIDSTATS_GLOBAL') {
             this.getCovidStatsByGlobal(payload)
-        } 
+        }
     }
 
 })
