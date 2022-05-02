@@ -1,5 +1,7 @@
 var NodeHelper = require('node_helper')
 var fetch = require('node-fetch')
+const { DateTime } = require('luxon')
+
 
 var getCountryStatsURL = 'https://corona.lmao.ninja/v2/countries/:query?yesterday='
 var globalStatsURL = 'https://corona.lmao.ninja/v2/all?yesterday='
@@ -9,6 +11,50 @@ module.exports = NodeHelper.create({
 
     start: function () {
         console.log('Starting node helper for: ' + this.name)
+    },
+
+    deconstructCountryData: function(payload) {
+        covidData = [];
+        payload.forEach(function(e) {
+            let updateDate = DateTime.fromMillis(e.updated).toISO();
+            let formatedDate = DateTime.fromISO(updateDate).toLocaleString(DateTime.DATETIME_MED);
+            covidData.push({
+                "updated": formatedDate,
+                "country": e.country,
+                "iso3": e.countryInfo.iso3,
+                "flag": e.countryInfo.flag,
+                "casesInfo": {
+                    "cases": e.cases,
+                    "todatyCases": e.todayCases,
+                    "deaths": e.deaths,
+                    "todayDeaths": e.todayDeaths,
+                    "recovered": e.recovered,
+                    "todayRecovered": e.todayRecovered,
+                    "active": e.active,
+                    "critical": e.critical
+                }
+            })
+        })
+        return covidData;
+    },
+
+    deconstructWorldData: function(woldpayload) {
+        worldData = [];
+        let updateDate = DateTime.fromMillis(e.updated).toISO();
+        let formatedDate = DateTime.fromISO(updateDate).toLocaleString(DateTime.DATETIME_MED);
+        worldData.push({
+            "updated": formatedDate,
+            "cases": e.cases,
+            "todatyCases": e.todayCases,
+            "deaths": e.deaths,
+            "todayDeaths": e.todayDeaths,
+            "recovered": e.recovered,
+            "todayRecovered": e.todayRecovered,
+            "active": e.active,
+            "critical": e.critical
+        })
+
+        return worldData;
     },
 
     async getCovidStatsByCountry(payload) {

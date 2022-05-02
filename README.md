@@ -10,6 +10,10 @@ A [MagicMirror²](https://magicmirror.builders) module to display Covid Stats fr
 
 ## Dependencies
 - node-fetch 2.6.1
+- luxon
+
+## Changes
+- Deconstruct Data for future use
 
 ## Installation
 
