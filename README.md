@@ -14,6 +14,10 @@ A [MagicMirror²](https://magicmirror.builders) module to display Covid Stats fr
 
 ## Changes
 - Deconstruct Data for future use
+- Updated template
+- Updated getStyles
+- Added an Update Date display
+- Fixed Template for Global Stats Display when option "false" is selected
 
 ## Installation
 
