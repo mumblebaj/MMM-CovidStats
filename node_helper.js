@@ -40,7 +40,7 @@ module.exports = NodeHelper.create({
 
     deconstructWorldData: function (woldpayload) {
         worldData = [];
-        let updateDate = DateTime.fromMillis(e.updated).toISO();
+        let updateDate = DateTime.fromMillis(updated).toISO();
         let formatedDate = DateTime.fromISO(updateDate).toLocaleString(DateTime.DATETIME_MED);
         worldData.push({
             "updated": formatedDate,
