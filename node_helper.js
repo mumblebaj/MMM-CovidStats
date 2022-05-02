@@ -43,7 +43,7 @@ module.exports = NodeHelper.create({
         let updateDate = DateTime.fromMillis(e.updated).toISO();
         let formatedDate = DateTime.fromISO(updateDate).toLocaleString(DateTime.DATETIME_MED);
         worldData.push({
-            "updated": e.formatedDate,
+            "updated": formatedDate,
             "cases": e.cases,
             "todatyCases": e.todayCases,
             "deaths": e.deaths,
