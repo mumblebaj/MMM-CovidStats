@@ -45,7 +45,7 @@ module.exports = NodeHelper.create({
         worldData.push({
             "updated": formatedDate,
             "cases": e.cases,
-            "todatyCases": e.todayCases,
+            "todayCases": e.todayCases,
             "deaths": e.deaths,
             "todayDeaths": e.todayDeaths,
             "recovered": e.recovered,
@@ -53,7 +53,7 @@ module.exports = NodeHelper.create({
             "active": e.active,
         })
 
-        return worldData;
+        return worldData[0];
     },
 
     async getCovidStatsByCountry(payload) {

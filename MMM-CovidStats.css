@@ -12,3 +12,8 @@
 .MMM-CovidStats .globalsts {
     padding-bottom: 15px;
 }
+
+.MMM-CovidStats .covfoot {
+    font-size: 1rem;
+    color: white;
+}
