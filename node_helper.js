@@ -38,19 +38,19 @@ module.exports = NodeHelper.create({
         return covidData;
     },
 
-    deconstructWorldData: function (woldpayload) {
+    deconstructWorldData: function (e) {
         worldData = [];
-        let updateDate = DateTime.fromMillis(updated).toISO();
+        let updateDate = DateTime.fromMillis(e.updated).toISO();
         let formatedDate = DateTime.fromISO(updateDate).toLocaleString(DateTime.DATETIME_MED);
         worldData.push({
-            "updated": formatedDate,
-            "cases": cases,
-            "todatyCases": todayCases,
-            "deaths": deaths,
-            "todayDeaths": todayDeaths,
-            "recovered": recovered,
-            "todayRecovered": todayRecovered,
-            "active": active,
+            "updated": e.formatedDate,
+            "cases": e.cases,
+            "todatyCases": e.todayCases,
+            "deaths": e.deaths,
+            "todayDeaths": e.todayDeaths,
+            "recovered": e.recovered,
+            "todayRecovered": e.todayRecovered,
+            "active": e.active,
         })
 
         return worldData;
