@@ -79,7 +79,7 @@ module.exports = NodeHelper.create({
             return;
         }
         var countryData = await response.json();
-        var parsedResponse = deconstructCountryData(countryData);
+        var parsedResponse = this.deconstructCountryData(countryData);
 
         this.sendSocketNotification('COVIDSTATS_COUNTRY_RESULTS', parsedResponse)
 
@@ -105,8 +105,8 @@ module.exports = NodeHelper.create({
             console.log(`Error fetching global stats: ${response.statusCode} ${response.statusText}`)
             return;
         }
-        var parsedResponse = await response.json()
-
+        var globalData = await response.json()
+        var parsedResponse = this.deconstructWorldData(globalData)
         this.sendSocketNotification('COVIDSTATS_GLOBAL_RESULTS', parsedResponse)
     },
 
