@@ -1,5 +1,7 @@
 var NodeHelper = require('node_helper')
 var fetch = require('node-fetch')
+const { DateTime } = require('luxon')
+
 
 var getCountryStatsURL = 'https://corona.lmao.ninja/v2/countries/:query?yesterday='
 var globalStatsURL = 'https://corona.lmao.ninja/v2/all?yesterday='
@@ -11,19 +13,62 @@ module.exports = NodeHelper.create({
         console.log('Starting node helper for: ' + this.name)
     },
 
+    deconstructCountryData: function (payload) {
+        covidData = [];
+        payload.forEach(function (e) {
+            let updateDate = DateTime.fromMillis(e.updated).toISO();
+            let formatedDate = DateTime.fromISO(updateDate).toLocaleString(DateTime.DATETIME_MED);
+            covidData.push({
+                "updated": formatedDate,
+                "country": e.country,
+                "countryInfo": {
+                    "iso3": e.countryInfo.iso3,
+                    "flag": e.countryInfo.flag
+                },
+                "cases": e.cases,
+                "todayCases": e.todayCases,
+                "deaths": e.deaths,
+                "todayDeaths": e.todayDeaths,
+                "recovered": e.recovered,
+                "todayRecovered": e.todayRecovered,
+                "active": e.active,
+                "critical": e.critical
+            })
+        })
+        return covidData;
+    },
+
+    deconstructWorldData: function (e) {
+        worldData = [];
+        let updateDate = DateTime.fromMillis(e.updated).toISO();
+        let formatedDate = DateTime.fromISO(updateDate).toLocaleString(DateTime.DATETIME_MED);
+        worldData.push({
+            "updated": formatedDate,
+            "cases": e.cases,
+            "todayCases": e.todayCases,
+            "deaths": e.deaths,
+            "todayDeaths": e.todayDeaths,
+            "recovered": e.recovered,
+            "todayRecovered": e.todayRecovered,
+            "active": e.active,
+        })
+
+        return worldData[0];
+    },
+
     async getCovidStatsByCountry(payload) {
         var countryList = payload.countries
-        
+
         var period = ""
 
-        if (payload.period === "current" ) {
+        if (payload.period === "current") {
             period = "false"
-        } else { 
-                if(payload.period === "yesterday") { 
-                    period = "true" 
-                } else { period = "false"}
-            }
-        
+        } else {
+            if (payload.period === "yesterday") {
+                period = "true"
+            } else { period = "false" }
+        }
+
         const getCountryStatsURL = `https://corona.lmao.ninja/v2/countries/${countryList}?yesterday=${period}`
 
         var response = await fetch(getCountryStatsURL)
@@ -32,8 +77,9 @@ module.exports = NodeHelper.create({
             console.log(`Error fetching country stats: ${response.statusCode} ${response.statusText}`)
             return;
         }
-        var parsedResponse = await response.json()
-        
+        var countryData = await response.json();
+        var parsedResponse = this.deconstructCountryData(countryData);
+
         this.sendSocketNotification('COVIDSTATS_COUNTRY_RESULTS', parsedResponse)
 
     },
@@ -42,14 +88,14 @@ module.exports = NodeHelper.create({
 
         var period = ""
 
-        if (payload.period === "current" ) {
+        if (payload.period === "current") {
             period = "false"
-        } else { 
-                if(payload.period === "yesterday") { 
-                    period = "true" 
-                } else { period = "false"}
-            }
-                
+        } else {
+            if (payload.period === "yesterday") {
+                period = "true"
+            } else { period = "false" }
+        }
+
         const getGlobalStatsURL = `https://corona.lmao.ninja/v2/all?yesterday=${period}`
 
         var response = await fetch(getGlobalStatsURL)
@@ -58,8 +104,8 @@ module.exports = NodeHelper.create({
             console.log(`Error fetching global stats: ${response.statusCode} ${response.statusText}`)
             return;
         }
-        var parsedResponse = await response.json()
-        
+        var globalData = await response.json()
+        var parsedResponse = this.deconstructWorldData(globalData)
         this.sendSocketNotification('COVIDSTATS_GLOBAL_RESULTS', parsedResponse)
     },
 
@@ -70,7 +116,7 @@ module.exports = NodeHelper.create({
 
         if (notification === 'GET_COVIDSTATS_GLOBAL') {
             this.getCovidStatsByGlobal(payload)
-        } 
+        }
     }
 
 })

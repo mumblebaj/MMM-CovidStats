@@ -2,13 +2,24 @@
     border-spacing: 10px 0;
     border-collapse: separate;
     text-align: center;
+    border-bottom: 1px solid whitesmoke;
 }
 
 .MMM-CovidStats .covhead {
     font-size: 1.5rem;
     padding-bottom: 20px;
+    color: white;
+}
+
+.MMM-CovidStats .covheaders {
+    color: whitesmoke;
 }
 
 .MMM-CovidStats .globalsts {
     padding-bottom: 15px;
+}
+
+.MMM-CovidStats .covfoot {
+    font-size: 0.75rem;
+    color: white;
 }

@@ -2,17 +2,44 @@
 {% if not countries %}
     <div class="dimmed light">{{ "LOADING" | translate }}</div>
 {% else %}
-        <table class="small table">
-            <thead>
-                <tr class="covheaders">
-                    <th>{{ " " }}</th>
-                    <th>{{ " " }}</th>
-                    <th>{{ "Confirmed" | translate }}</th>
-                    <th>{{ "New Cases" | translate }}</th>
-                    <th>{{ "Deaths" | translate }}</th>
-                    <th>{{ "New Deaths" | translate }}</th>
-                    <th>{{ "Recovered" | translate }}</th>
-                    <th>{{ "Active" | translate }}</th>
+    <table class="small table">
+        <thead>
+            <tr class="covheaders">
+                <th>{{ " " }}</th>
+                <th>{{ " " }}</th>
+                <th>{{ "Confirmed" | translate }}</th>
+                <th>{{ "New Cases" | translate }}</th>
+                <th>{{ "Deaths" | translate }}</th>
+                <th>{{ "New Deaths" | translate }}</th>
+                <th>{{ "Recovered" | translate }}</th>
+                <th>{{ "Active" | translate }}</th>
+            </tr>
+        </thead>
+        <tbody class="covbody">
+            {% if globalstats %}
+                {# Add Global stats here #}
+                <tr class="globalsts">
+                    <td>{{ " " }}</td>
+                    <td align="center">
+                        {{ "Global Stats" }}</td>
+                    <td align="center">
+                        {{ globalstats.cases }}
+                    </td>
+                    <td align="center">
+                        {{ globalstats.todayCases }}
+                    </td>
+                    <td align="center">
+                        {{ globalstats.deaths }}
+                    </td>
+                    <td align="center">
+                        {{ globalstats.todayDeaths }}
+                    </td>
+                    <td align="center">
+                        {{ globalstats.recovered }}
+                    </td>
+                    <td align="center">
+                        {{ globalstats.active }}
+                    </td>
                 </tr>
             </thead>
             <tbody class="covbody">
