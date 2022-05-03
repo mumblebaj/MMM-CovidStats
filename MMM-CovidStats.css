@@ -11,6 +11,10 @@
     color: white;
 }
 
+.MMM-CovidStats .covheaders {
+    color: whitesmoke;
+}
+
 .MMM-CovidStats .globalsts {
     padding-bottom: 15px;
 }
