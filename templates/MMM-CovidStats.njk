@@ -41,58 +41,56 @@
                         {{ globalstats.active }}
                     </td>
                 </tr>
-            </thead>
-            <tbody class="covbody">
-                {% if globalstats %}
-                    {# Add Global stats here #}
-                    <tr class="globalsts">
-                        <td>{{ " " }}</td>
-                        <td align="center">
-                            {{ "Global Stats" }}</td>
-                        <td align="center">
-                            {{ globalstats.cases }}
-                        </td>
-                        <td align="center">
-                            {{ globalstats.todayCases }}
-                        </td>
-                        <td align="center">
-                            {{ globalstats.deaths }}
-                        </td>
-                        <td align="center">
-                            {{ globalstats.todayDeaths }}
-                        </td>
-                        <td align="center">
-                            {{ globalstats.recovered }}
-                        </td>
-                        <td align="center">
-                            {{ globalstats.active }}
-                        </td>
-                    </tr>
-                {% else %}
-                    <tr class="globalsts">
-                        <td>{{ " " }}</td>
-                        <td align="center">
-                            {{ "Global Stats" }}</td>
-                        <td align="center">{{ globalstats.cases }}</td>
-                        <td align="center">{{ globalstats.todayCases }}</td>
-                        <td align="center">{{ globalstats.deaths}}</td>
-                        <td align="center">{{ globalstats.todayDeaths }}</td>
-                        <td align="center">{{ globalstats.recovered }}</td>
-                        <td align="center">{{ globalstats.active }}</td>
-                    </tr>
-                {% endif %}
-                {% for stats in countries | sort(true, false, config.sortBy) %}
-                    <tr class="{{ "bright" if config.highlightCountry === stats.countryInfo.iso3 }}">
-                        <td align="left"><img src="{{ stats.countryInfo.flag }}"  width=30px height=30px/></td>
-                        <td align="center">{{ stats.country }}</td>
-                        <td align="center">{{ stats.cases }}</td>
-                        <td align="center">{{ stats.todayCases }}</td>
-                        <td align="center">{{ stats.deaths }}</td>
-                        <td align="center">{{ stats.todayDeaths }}</td>
-                        <td align="center">{{ stats.recovered }}</td>
-                        <td align="center">{{ stats.active }}</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+            {% else %}
+                <tr class="globalsts">
+                    <td>{{ " " }}</td>
+                    <td align="center">
+                        {{ " " }}</td>
+                    <td align="center">{{ " " }}</td>
+                    <td align="center">{{ " " }}</td>
+                    <td align="center">{{ " "}}</td>
+                    <td align="center">{{ " " }}</td>
+                    <td align="center">{{ " " }}</td>
+                    <td align="center">{{ " " }}</td>
+                </tr>
+            {% endif %}
+            {% for stats in countries | sort(true, false, config.sortBy) %}
+                <tr class="{{ "bright" if config.highlightCountry === stats.countryInfo.iso3 }}">
+                    <td align="left"><img src="{{ stats.countryInfo.flag }}"  width=30px height=30px/></td>
+                    <td align="center">{{ stats.country }}</td>
+                    <td align="center">{{ stats.cases }}</td>
+                    <td align="center">{{ stats.todayCases }}</td>
+                    <td align="center">{{ stats.deaths }}</td>
+                    <td align="center">{{ stats.todayDeaths }}</td>
+                    <td align="center">{{ stats.recovered }}</td>
+                    <td align="center">{{ stats.active }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot class="covfoot">
+            {% if globalsts %}
+                <tr class="covfoot-row">
+                    <td>{{ " " }}</td>
+                    <td>{{ " " }}</td>
+                    <td>{{ " " }}</td>
+                    <td>{{ " " }}</td>
+                    <td>{{ " " }}</td>
+                    <td>{{ " " }}</td>
+                    <td align="right">Last update taken at: </td>
+                    <td align="left">{{ globalstats.updated }}</td>
+                </tr>
+            {% else %}
+                <tr class="covfoot-row">
+                    <td>{{ " " }}</td>
+                    <td>{{ " " }}</td>
+                    <td>{{ " " }}</td>
+                    <td>{{ " " }}</td>
+                    <td>{{ " " }}</td>
+                    <td>{{ " " }}</td>
+                    <td align="right">Last update taken at: </td>
+                    <td align="left">{{ countries[0].updated }}</td>
+                </tr>
+            {% endif %}
+        </tfoot>
+    </table>
 {% endif %}
