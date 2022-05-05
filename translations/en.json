@@ -3,7 +3,7 @@
     "todayCases": "New Cases",
     "deaths": "Deaths",
     "todayDeaths": "New Deaths",
-    "critical" : "Serious Cases",
+    "critical" : "Critical",
     "recovered": "Recovered",
     "todayRecovered": "Today Recovered",
     "active": "Active",

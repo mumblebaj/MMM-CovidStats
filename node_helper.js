@@ -46,17 +46,19 @@ module.exports = NodeHelper.create({
         let formatedDate = DateTime.fromISO(updateDate).toLocaleString(DateTime.DATETIME_MED);
         worldData.push({
             "updated": formatedDate,
-            "cases": e.cases,
-            "todayCases": e.todayCases,
-            "deaths": e.deaths,
-            "todayDeaths": e.todayDeaths,
-            "recovered": e.recovered,
-            "todayRecovered": e.todayRecovered,
-            "active": e.active,
-            "critical": e.critical
+            "casesInfo": {
+                "cases": e.cases,
+                "todayCases": e.todayCases,
+                "deaths": e.deaths,
+                "todayDeaths": e.todayDeaths,
+                "recovered": e.recovered,
+                "todayRecovered": e.todayRecovered,
+                "active": e.active,
+                "critical": e.critical
+            }
         })
 
-        return worldData[0];
+        return worldData;
     },
 
     async getCovidStatsByCountry(payload) {
@@ -135,7 +137,7 @@ module.exports = NodeHelper.create({
             this.sendSocketNotification('COVIDSTATS_GLOBAL_RESULTS', datatobefiltered[0])
         } else {
 
-            this.sendSocketNotification('COVIDSTATS_GLOBAL_RESULTS', parsedResponse)
+            this.sendSocketNotification('COVIDSTATS_GLOBAL_RESULTS', parsedResponse[0])
         }
     },
 
