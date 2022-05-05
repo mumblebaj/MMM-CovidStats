@@ -4,6 +4,7 @@ Module.register("MMM-CovidStats", {
         title: "MMM-CovidStats",
         countries: ["USA", "ZAF", "ESP", "GBR"],
         globlStats: false,
+        doNotDisplay: ["recovered", "todayRecovered", "critical"],
         sortBy: "cases", // Sort the list of country stats by this value
         period: "current", // options current or yesterday
         highlightCountry: "USA",
