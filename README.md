@@ -7,17 +7,15 @@ A [MagicMirror²](https://magicmirror.builders) module to display Covid Stats fr
 
 ![Example](image-1.png) 
 ![Example](image-2.png) 
+![Example](image-3.png) 
 
 ## Dependencies
 - node-fetch 2.6.1
 - luxon
 
 ## Changes
-- Deconstruct Data for future use
-- Updated template
-- Updated getStyles
-- Added an Update Date display
-- Fixed Template for Global Stats Display when option "false" is selected
+- Add functionality for a user to exclude specific data. See Configuration Option `doNotDisplay`
+- This change has resulted on the loss of the sort functionality. Working to find a solution for this.
 
 ## Installation
 
@@ -43,6 +41,7 @@ Add the module to the modules array in the `config/config.js` file:
                 config: {
                                 countries: ["USA","ZAF","ESP"],
                                 globalStats: true,
+                                doNotDisplay: ["recovered", "critical", "todayRecovered"]
                                 period: "yesterday",
                                 title: "COVID STATS",
                                 sortBy: "cases",
@@ -63,6 +62,7 @@ The following properties can be configured:
 | `title`                      | The Title text <br>Must be added to the config section
 | `countries`                  | An array of iso3 country codes which can be found [here](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3)
 | `globalStats`                | Include Global Stats <br><br> **Possible values:** `true` or `false`
+| `doNotDisplay`               | An Array of Fields to exclude from the Displayed Data <br><br> **Possible values:** `cases`, `todayCases`, `deaths`, `todayDeaths`, `recovered`, `todayRecovered`, `active`, `critical`
 | `sortBy`                     | Option to sort the country stats by a specified column <br><br> **Possible values:** `cases`, `todayCases`, `deaths`, `todayDeaths`, `recovered`, `active`
 | `highlighCountry`            | The iso3 code of the country to highlight
 | `updateInterval`             | The time interval to between fetching new stats <br> **Default value:** `24 hours`
