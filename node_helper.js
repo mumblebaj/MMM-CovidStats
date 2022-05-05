@@ -25,14 +25,16 @@ module.exports = NodeHelper.create({
                     "iso3": e.countryInfo.iso3,
                     "flag": e.countryInfo.flag
                 },
-                "cases": e.cases,
-                "todayCases": e.todayCases,
-                "deaths": e.deaths,
-                "todayDeaths": e.todayDeaths,
-                "recovered": e.recovered,
-                "todayRecovered": e.todayRecovered,
-                "active": e.active,
-                "critical": e.critical
+                "casesInfo": {
+                    "cases": e.cases,
+                    "todayCases": e.todayCases,
+                    "deaths": e.deaths,
+                    "todayDeaths": e.todayDeaths,
+                    "recovered": e.recovered,
+                    "todayRecovered": e.todayRecovered,
+                    "active": e.active,
+                    "critical": e.critical
+                }
             })
         })
         return covidData;
@@ -51,6 +53,7 @@ module.exports = NodeHelper.create({
             "recovered": e.recovered,
             "todayRecovered": e.todayRecovered,
             "active": e.active,
+            "critical": e.critical
         })
 
         return worldData[0];
@@ -80,8 +83,22 @@ module.exports = NodeHelper.create({
         var countryData = await response.json();
         var parsedResponse = this.deconstructCountryData(countryData);
 
-        this.sendSocketNotification('COVIDSTATS_COUNTRY_RESULTS', parsedResponse)
+        var datatobefiltered = covidData;
 
+        if (payload.doNotDisplay) {
+            // Get list of data to remove
+            const remove = payload.doNotDisplay
+            // Iterate through covidData and remove the data to be excluded
+            remove.forEach(function (e) {
+                for (i = 0; i < datatobefiltered.length; i++) {
+                    delete datatobefiltered[i].casesInfo[e]
+                }
+            })
+            this.sendSocketNotification('COVIDSTATS_COUNTRY_RESULTS', datatobefiltered)
+        } else {
+
+            this.sendSocketNotification('COVIDSTATS_COUNTRY_RESULTS', parsedResponse)
+        }
     },
 
     async getCovidStatsByGlobal(payload) {
@@ -106,7 +123,20 @@ module.exports = NodeHelper.create({
         }
         var globalData = await response.json()
         var parsedResponse = this.deconstructWorldData(globalData)
-        this.sendSocketNotification('COVIDSTATS_GLOBAL_RESULTS', parsedResponse)
+
+        var datatobefiltered = worldData;
+
+        if (payload.doNotDisplay) {
+            const remove = payload.doNotDisplay
+
+            remove.forEach(function (e) {
+                delete datatobefiltered[0].casesInfo[e]
+            })
+            this.sendSocketNotification('COVIDSTATS_GLOBAL_RESULTS', datatobefiltered[0])
+        } else {
+
+            this.sendSocketNotification('COVIDSTATS_GLOBAL_RESULTS', parsedResponse)
+        }
     },
 
     socketNotificationReceived: function (notification, payload) {

@@ -1,13 +1,14 @@
 {
-    "Confirmed": "Confirmés",
-    "New Cases": "Nouveaux Cas",
-    "Deaths": "Décès",
-    "New Deaths": "Nouveaux Décès",
-    "Serious" : "Cas Sérieux",
-    "Recovered": "Gérisons",
-    "Active": "Actifs",
+    "cases": "Confirmés",
+    "todayCases": "Nouveaux Cas",
+    "deaths": "Décès",
+    "todayDeaths": "Nouveaux Décès",
+    "critical" : "Cas Sérieux",
+    "recovered": "Récupéré",
+    "todayRecovered": "Aujourd'hui Récupéré",
+    "active": "Actifs",
     "Cases Per M" : "Cas Par M",
     "Worldwide" : "Monde",
-    "statistic taken at ": "statistiques du ",
+    "statistic taken at": "statistiques du ",
     "N/A" : "N/A"
 }
