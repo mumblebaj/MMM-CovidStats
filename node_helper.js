@@ -3,8 +3,8 @@ var fetch = require('node-fetch')
 const { DateTime } = require('luxon')
 
 
-var getCountryStatsURL = 'https://corona.lmao.ninja/v2/countries/:query?yesterday='
-var globalStatsURL = 'https://corona.lmao.ninja/v2/all?yesterday='
+var getCountryStatsURL = 'https://disease.sh/v3/covid-19/countries/:query?yesterday='
+var globalStatsURL = 'https://disease.sh/v3/covid-19/all?yesterday='
 
 module.exports = NodeHelper.create({
     requiresVersion: '2.0.18',
@@ -74,7 +74,7 @@ module.exports = NodeHelper.create({
             } else { period = "false" }
         }
 
-        const getCountryStatsURL = `https://corona.lmao.ninja/v2/countries/${countryList}?yesterday=${period}`
+        const getCountryStatsURL = `https://disease.sh/v3/covid-19/countries/${countryList}?yesterday=${period}`
 
         var response = await fetch(getCountryStatsURL)
 
@@ -115,7 +115,7 @@ module.exports = NodeHelper.create({
             } else { period = "false" }
         }
 
-        const getGlobalStatsURL = `https://corona.lmao.ninja/v2/all?yesterday=${period}`
+        const getGlobalStatsURL = `https://disease.sh/v3/covid-19/all?yesterday=${period}`
 
         var response = await fetch(getGlobalStatsURL)
 

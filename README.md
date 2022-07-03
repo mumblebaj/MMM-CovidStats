@@ -14,8 +14,7 @@ A [MagicMirror²](https://magicmirror.builders) module to display Covid Stats fr
 - luxon
 
 ## Changes
-- Add functionality for a user to exclude specific data. See Configuration Option `doNotDisplay`
-- This change has resulted on the loss of the sort functionality. Working to find a solution for this.
+- Update sources
 
 ## Installation
 
