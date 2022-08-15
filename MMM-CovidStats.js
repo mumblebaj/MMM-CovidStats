@@ -52,6 +52,22 @@ Module.register("MMM-CovidStats", {
         this.scheduleUpdate()
     },
 
+    stop: function () {
+        Log.info('Stopping module ' + this.name);
+      },
+    
+      resume: function () {
+        Log.info('Resuming module ' + this.name);
+        Log.debug('with config: ' + JSON.stringify(this.config));
+        this.suspend = false;
+        this.updateDom()
+      },
+    
+      suspend: function () {
+        Log.info('Suspending module ' + this.name);
+        this.suspend = true;
+      },
+
     getCovidStats: function() {
         this.sendSocketNotification("GET_COVIDSTATS_COUNTRY", this.config)
 
