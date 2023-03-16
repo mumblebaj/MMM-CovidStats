@@ -47,7 +47,7 @@ Module.register("MMM-CovidStats", {
 
     start: function() {
         Log.info(`Starting module: ${this.name}`);
-
+        suspended = true;
         this.getCovidStats()
         this.scheduleUpdate()
     },
@@ -59,13 +59,13 @@ Module.register("MMM-CovidStats", {
       resume: function () {
         Log.info('Resuming module ' + this.name);
         Log.debug('with config: ' + JSON.stringify(this.config));
-        this.suspend = false;
+        this.suspended = false;
         this.updateDom()
       },
     
       suspend: function () {
         Log.info('Suspending module ' + this.name);
-        this.suspend = true;
+        this.suspended = true;
       },
 
     getCovidStats: function() {
